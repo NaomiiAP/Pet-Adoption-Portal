@@ -246,7 +246,8 @@ export default function PetProfilePage({ params }: { params: { id: string } }) {
                       <li key={index} className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                         <span className="text-gray-700">{requirement}</span>
-                      </li>
+                        
+                      </li> 
                     ))}
                   </ul>
                 </CardContent>
