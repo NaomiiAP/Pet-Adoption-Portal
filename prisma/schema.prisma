@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model adopter {
+  aid            Int              @id @default(autoincrement())
+  fname          String?          @db.VarChar(100)
+  aemail         String?          @db.VarChar(100)
+  aphno          String?          @db.VarChar(15)
+  aaddress       String?          @db.Text
+  account        String?          @db.VarChar(100)
+  adoptionrecord adoptionrecord[]
+}
+
+model adoptionrecord {
+  rid          Int       @id @default(autoincrement())
+  aid          Int?
+  pid          Int?
+  sid          Int?
+  adoptiondate DateTime? @db.Date
+  notes        String?   @db.Text
+  adopter      adopter?  @relation(fields: [aid], references: [aid], onDelete: NoAction, onUpdate: NoAction, map: "adoptionrecord_ibfk_1")
+  pets         pets?     @relation(fields: [pid], references: [pid], onDelete: NoAction, onUpdate: NoAction, map: "adoptionrecord_ibfk_2")
+  shelter      shelter?  @relation(fields: [sid], references: [sid], onDelete: NoAction, onUpdate: NoAction, map: "adoptionrecord_ibfk_3")
+
+  @@index([aid], map: "aid")
+  @@index([pid], map: "pid")
+  @@index([sid], map: "sid")
+}
+
+model petmedicalrecord {
+  mrid        Int       @id @default(autoincrement())
+  pid         Int?
+  checkupdate DateTime? @db.Date
+  mcondition  String?   @db.Text
+  treatment   String?   @db.Text
+  vetname     String?   @db.VarChar(100)
+  pets        pets?     @relation(fields: [pid], references: [pid], onDelete: NoAction, onUpdate: NoAction, map: "petmedicalrecord_ibfk_1")
+
+  @@index([pid], map: "pid")
+}
+
+model pets {
+  pid              Int                @id @default(autoincrement())
+  pname            String?            @db.VarChar(100)
+  species          String?            @db.VarChar(50)
+  gender           String?            @db.VarChar(10)
+  age              Int?
+  adoptionstatus   String?            @db.VarChar(10)
+  imageurl         String?            @db.VarChar(255)
+  sid              Int?
+  adoptionrecord   adoptionrecord[]
+  petmedicalrecord petmedicalrecord[]
+  shelter          shelter?           @relation(fields: [sid], references: [sid], onDelete: NoAction, onUpdate: NoAction, map: "pets_ibfk_1")
+
+  @@index([sid], map: "sid")
+}
+
+model shelter {
+  sid            Int              @id @default(autoincrement())
+  sname          String?          @db.VarChar(100)
+  saddress       String?          @db.Text
+  sphno          String?          @db.VarChar(15)
+  semail         String?          @db.VarChar(100)
+  adoptionrecord adoptionrecord[]
+  pets           pets[]
+}
