@@ -7,7 +7,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const { checkupdate, condition, treatment, vetname } = await request.json()
 
     await executeQuery(
-      "UPDATE PetMedicalRecord SET checkupdate = ?, condition = ?, treatment = ?, vetname = ? WHERE mrid = ?",
+      "UPDATE PetMedicalRecord SET checkupdate = ?, mcondition = ?, treatment = ?, vetname = ? WHERE mrid = ?",
       [checkupdate, condition, treatment, vetname, params.id],
     )
 

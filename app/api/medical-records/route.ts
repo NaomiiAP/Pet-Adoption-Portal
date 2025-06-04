@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const { pid, checkupdate, condition, treatment, vetname } = await request.json()
 
     const result = await executeQuery(
-      "INSERT INTO PetMedicalRecord (pid, checkupdate, condition, treatment, vetname) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO PetMedicalRecord (pid, checkupdate, mcondition, treatment, vetname) VALUES (?, ?, ?, ?, ?)",
       [pid, checkupdate, condition, treatment, vetname],
     )
 
