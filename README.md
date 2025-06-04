@@ -17,8 +17,8 @@ A simple full-stack project using **Next.js** for frontend and **SQL** (MySQL) f
 
 ## Tech Stack
 
-- Frontend: Next.js  
-- Database: SQL (MySQL)
+- **Frontend**: Next.js  
+- **Database**: SQL (MySQL)
 
 ---
 
@@ -32,6 +32,6 @@ A simple full-stack project using **Next.js** for frontend and **SQL** (MySQL) f
 ---
 
 ## Developed by  
-Naomi Pereira  
-Prapti Nayak 
-Natasha Brito
+- Naomi Pereira  
+- Prapti Nayak  
+- Natasha Brito
